@@ -1,38 +1,29 @@
 import javax.swing.JButton
 import javax.swing.JFrame
+import javax.swing.JLabel
 import javax.swing.JTextArea
 
 fun main() {
-    val screen = JFrame("lexer-test")
+    val frame = JFrame("Interpreter-test")
     val textArea = JTextArea()
-    val button = JButton()
+    val button = JButton("Run")
+    val output = JTextArea()
+    val outputDesc = JLabel("Output:")
+    val inputDesc = JLabel("Input:")
 
-    screen.isVisible = true
-    screen.add(textArea).setBounds(100, 200, 100, 100)
-    screen.add(button).setBounds(100, 100, 100, 100)
-    screen.layout = null
-    screen.setSize(800, 800)
-    screen.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+    frame.layout = null
+    frame.add(textArea)
+    frame.add(output)
+    frame.add(button)
+    frame.add(outputDesc)
+    frame.add(inputDesc)
+    frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+    frame.setSize(800, 800)
+    frame.isVisible = true
 
-    button.addActionListener() {
-        /*if (textArea.text == "print") {
-            println("uwu")
-        }*/
-        val tokens = lexer(textArea.text)
-        parser(tokens)
-    }
-
-    val isEmpty = textArea.text.isEmpty()
-    println("Is the JTextArea empty? $isEmpty")
-}
-
-fun lexer(input: String): List<String> {
-    val tokens = input.split(" ".toRegex())
-    return tokens
-}
-
-fun parser(tokens: List<String>) {
-    for (token in tokens) {
-        println(token)
-    }
+    button.setBounds(100, 0, 200, 100)
+    inputDesc.setBounds(100, 75, 200, 100)
+    textArea.setBounds(100, 150, 200, 100)
+    outputDesc.setBounds(100, 225, 200, 100)
+    output.setBounds(100, 300, 200, 100)
 }
