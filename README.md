@@ -1,5 +1,5 @@
 # interpreter-testing
-A playground repository for developing the inpreter for the coro language.
+A playground repository for developing the inpreter for the coro language. Semi-accurate progress tracking [Roadmap](https://github.com/Thepigcat76/coro-interpreter/blob/master/src/main/resources/roadmap.md)
 
 # coro-lang
 Q: What is coro-lang?
