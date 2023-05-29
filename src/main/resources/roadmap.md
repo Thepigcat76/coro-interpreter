@@ -6,4 +6,4 @@
 - Abstract Syntax Tree - not started
 - Interpreter - not started
 - Runtime Environment - not started
-- Error handle . not started
+- Error handler - not started
