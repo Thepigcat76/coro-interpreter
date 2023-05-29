@@ -1,4 +1,4 @@
-package interpreter
+package lexer
 
 import java.io.BufferedReader
 import java.io.FileReader
