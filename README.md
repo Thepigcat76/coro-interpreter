@@ -15,6 +15,9 @@ Q: What makes it special?
 A: The pyhsical language of you code can vary depending on the language you selected.
    It also supports advanced programming patterns for advanced users.
    
+# Techstack
+Kotlin
+   
 # License
 MIT license
 Copyright (c) 2023 thepigcat76
