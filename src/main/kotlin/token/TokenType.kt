@@ -1,6 +1,6 @@
 package token
 
-enum class TokenTypes(val token: String) {
+enum class TokenType(val token: String) {
     NOT("not"),
     COLON(":"),
 
@@ -17,4 +17,4 @@ enum class TokenTypes(val token: String) {
     END_DEFINE("endDefine")
 }
 
-data class Token(val type: TokenTypes, val name: String)
+data class Token(val type: TokenType, val value: String)
