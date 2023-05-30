@@ -5,7 +5,9 @@ enum class TokenType(val token: String) {
     WHILE("while"),
     TIMES("times"),
     ALWAYS("always"),
+
     COLON(":"),
+    QUOT("\""),
 
     IF("if"),
     REPEAT("repeat"),
