@@ -27,6 +27,7 @@ fun tokenize(input: String): List<Token> {
                     currentPosition++
                 }
                 tokens.add(Token(TokenType.IDENTIFIER, identifier.toString()))
+                println("Identifier: " + identifier)
             }
             char.isDigit() -> {
                 // Handle integer literals
@@ -54,7 +55,7 @@ fun filterTokens(tokens: List<Token>, desiredTokenType: TokenType): List<Token> 
 }
 
 fun main() {
-    val input = "x = 42p + y"
+    val input = "x = 42 + y"
 
     // Tokenize the input
     val tokens = tokenize(input)
