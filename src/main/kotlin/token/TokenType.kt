@@ -2,12 +2,13 @@ package token
 
 enum class TokenType(val token: String) {
     NOT("not"),
+    WHILE("while"),
+    TIMES("times"),
+    ALWAYS("always"),
     COLON(":"),
 
     IF("if"),
-    REPEAT_WHILE("repeat while"),
-    REPEAT_TIMES("repeat times"),
-    REPEAT_ALWAYS("repeat always"),
+    REPEAT("repeat"),
     DEFINE("define"),
 
     ENDIF("endIf"),
