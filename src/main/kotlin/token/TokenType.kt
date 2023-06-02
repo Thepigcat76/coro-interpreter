@@ -1,23 +1,36 @@
 package token
 
-enum class TokenType(val token: String) {
-    NOT("not"),
-    WHILE("while"),
-    TIMES("times"),
-    ALWAYS("always"),
+//Define the possible keywords and symbols
+enum class TokenType(val tokenType: String) {
+    NOT("NOT"),
+    WHILE("WHILE"),
+    TIMES("TIMES"),
+    ALWAYS("ALWAYS"),
 
     COLON(":"),
     QUOT("\""),
+    INTEGER("INTEGER"),
 
-    IF("if"),
-    REPEAT("repeat"),
-    DEFINE("define"),
+    IF("IF"),
+    ELSE("ELSE"),
+    REPEAT("REPEAT"),
+    DEFINE("DEFINE"),
 
-    ENDIF("endIf"),
-    END_REPEAT_WHILE("endRepeatWhile"),
-    END_REPEAT_TIMES("endRepeatTimes"),
-    END_REPEAT_ALWAYS("endRepeatAlways"),
-    END_DEFINE("endDefine")
+    END("END")
 }
 
-data class Token(val type: TokenType, val value: String)
+// Data class to determine TokenType and value
+data class Token(val type: TokenType, val literal: String)
+
+// Hash map for storing
+// string values of keywords
+val keywords = mapOf(
+    "define" to TokenType.DEFINE,
+    "always" to TokenType.ALWAYS,
+    "times" to TokenType.TIMES,
+    "repeat" to TokenType.REPEAT,
+    "end" to TokenType.END,
+    "if" to TokenType.IF,
+    "else" to TokenType.ELSE,
+    "not" to TokenType.NOT,
+)
