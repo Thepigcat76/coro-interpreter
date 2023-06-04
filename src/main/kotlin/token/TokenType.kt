@@ -20,7 +20,19 @@ enum class TokenType(val tokenType: String) {
 }
 
 // Data class to determine TokenType and value
-data class Token(val type: TokenType, val literal: String)
+data class Token(val type: TokenType, val literal: String) {
+
+    // adds a second alternate constructor
+    // by automatically assigning a value to
+    // the literal parameter based on the TokenType
+    constructor(type: TokenType) : this(type, keywords.entries.find { it.value == type }?.key ?: "")
+
+    // Overrides the default
+    // String conversion behaviour
+    override fun toString(): String {
+        return "TokenType(type==$type, literal='$literal')"
+    }
+}
 
 // Hash map for storing
 // string values of keywords
