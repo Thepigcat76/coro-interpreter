@@ -1,4 +1,4 @@
-- Lexer - started
+- Lexer - finished
 - Parser - not started
 - Tokens - finished
 - Semantic Analyzer - not started
