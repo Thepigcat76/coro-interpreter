@@ -2,14 +2,15 @@ package lexer
 
 import token.Token
 import token.TokenType
-import token.keywords
+import java.io.BufferedReader
+import java.io.File
 
 class Lexer {
     fun tokenize(input: String): List<Token> {
         val tokens = mutableListOf<Token>()
         var currentPos = 0
         while (currentPos < input.length) {
-            var char = input[currentPos]
+            val char = input[currentPos]
             when {
                 char.isWhitespace() -> {
                     currentPos++
@@ -55,7 +56,15 @@ class Lexer {
                         }
 
                         "while" -> {
-                            tokens.add(Token(TokenType.WHILE, "while"))
+                            tokens.add(Token(TokenType.WHILE))
+                        }
+
+                        "EOL" -> {
+                            tokens.add(Token(TokenType.EOL, "EOL"))
+                        }
+
+                        else -> {
+                            tokens.add(Token(TokenType.FUNCTION, "$identifier"))
                         }
                     }
                 }
@@ -65,9 +74,6 @@ class Lexer {
                     while (currentPos < input.length && input[currentPos].isDigit() && !input[currentPos].isWhitespace()) {
                         identifier.append(input[currentPos])
                         currentPos++
-                        if (currentPos < input.length) {
-                            char = input[currentPos]
-                        }
                     }
                     tokens.add(Token(TokenType.INTEGER, identifier.toString()))
                 }
@@ -77,8 +83,34 @@ class Lexer {
     }
 }
 
+class ReadFile {
+    fun read(): String? {
+        val filename = "example.coro"
+        val file = File(filename)
+        var lines: Array<String?> = emptyArray()
+
+        try {
+            val reader = BufferedReader(file.reader())
+            var line: String?
+            while (reader.readLine().also { line = it } != null) {
+                lines += line
+                lines += "EOL"
+            }
+            reader.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return convertLinesToString(lines)
+    }
+
+    private fun convertLinesToString(lines: Array<String?>): String? {
+        val words = lines.flatMap { line -> line?.split("\\s+".toRegex()) ?: emptyList() }
+        return words.joinToString(" ")
+    }
+}
+
+val tokenStream = Lexer().tokenize(ReadFile().read().toString())
 
 fun main() {
-    val tokens = Lexer().tokenize("if not while repeat 908")
-    println(tokens)
+    println(tokenStream)
 }

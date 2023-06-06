@@ -1,4 +1,1 @@
 package parser
-
-class Parser {
-}

@@ -10,13 +10,15 @@ enum class TokenType(val tokenType: String) {
     COLON(":"),
     QUOT("\""),
     INTEGER("INTEGER"),
+    FUNCTION("FUNCTION"),
 
     IF("IF"),
     ELSE("ELSE"),
     REPEAT("REPEAT"),
     DEFINE("DEFINE"),
+    END("END"),
 
-    END("END")
+    EOL("EOL") // End of line
 }
 
 // Data class to determine TokenType and value
@@ -45,4 +47,5 @@ val keywords = mapOf(
     "if" to TokenType.IF,
     "else" to TokenType.ELSE,
     "not" to TokenType.NOT,
+    "while" to TokenType.WHILE,
 )
