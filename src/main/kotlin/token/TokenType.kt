@@ -1,24 +1,24 @@
 package token
 
 //Define the possible keywords and symbols
-enum class TokenType(val tokenType: String) {
-    NOT("NOT"),
-    WHILE("WHILE"),
-    TIMES("TIMES"),
-    ALWAYS("ALWAYS"),
+enum class TokenType {
+    NOT,
+    WHILE,
+    TIMES,
+    ALWAYS,
 
-    COLON(":"),
-    QUOT("\""),
-    INTEGER("INTEGER"),
-    FUNCTION("FUNCTION"),
+    COLON, // Colon :
+    QUOT, // Quotation marks ""
+    INTEGER, // Any integer
+    FUNCTION, // Result of a definition
 
-    IF("IF"),
-    ELSE("ELSE"),
-    REPEAT("REPEAT"),
-    DEFINE("DEFINE"),
-    END("END"),
+    IF,
+    ELSE,
+    REPEAT,
+    DEFINE,
+    END,
 
-    EOL("EOL") // End of line
+    EOL // End of line
 }
 
 // Data class to determine TokenType and value

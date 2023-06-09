@@ -23,39 +23,39 @@ class Lexer {
                         currentPos++
                     }
                     when (identifier.toString()) {
-                        "not" -> {
+                        "not", "nicht" -> {
                             tokens.add(Token(TokenType.NOT))
                         }
 
-                        "if" -> {
+                        "if", "wenn" -> {
                             tokens.add(Token(TokenType.IF))
                         }
 
-                        "repeat" -> {
+                        "repeat", "wiederhole" -> {
                             tokens.add(Token(TokenType.REPEAT))
                         }
 
-                        "end" -> {
+                        "end", "ende" -> {
                             tokens.add(Token(TokenType.END))
                         }
 
-                        "else" -> {
+                        "else", "sonst" -> {
                             tokens.add(Token(TokenType.ELSE))
                         }
 
-                        "always" -> {
+                        "always", "immer" -> {
                             tokens.add(Token(TokenType.ALWAYS))
                         }
 
-                        "times" -> {
+                        "times", "mal" -> {
                             tokens.add((Token(TokenType.TIMES)))
                         }
 
-                        "define" -> {
+                        "define", "definiere" -> {
                             tokens.add(Token(TokenType.DEFINE))
                         }
 
-                        "while" -> {
+                        "while", "solange" -> {
                             tokens.add(Token(TokenType.WHILE))
                         }
 
@@ -85,7 +85,7 @@ class Lexer {
 
 class ReadFile {
     fun read(): String? {
-        val filename = "example.coro"
+        val filename = "src/main/resources/example.coro"
         val file = File(filename)
         var lines: Array<String?> = emptyArray()
 

@@ -1,6 +1,6 @@
 - Lexer - finished
-- Parser - not started
 - Tokens - finished
+- Parser - started
 - Semantic Analyzer - not started
 - symbol table - not started
 - Abstract Syntax Tree - not started
