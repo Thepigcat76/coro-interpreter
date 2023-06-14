@@ -92,10 +92,10 @@ class Parser(private val tokens: List<Token>) {
 
 fun main() {
     val tokens = listOf(
-        Token(TokenType.IF),
-        Token(TokenType.LEFT_BRACE),
-        Token(TokenType.NUMBER),
-        Token(TokenType.RIGHT_BRACE)
+        Token(TokenType.IF),              // Expect 'if' keyword
+        Token(TokenType.LEFT_BRACE),      // Expect '{' after if condition
+        Token(TokenType.NUMBER),          // Example expression (can be replaced with other tokens or logic)
+        Token(TokenType.RIGHT_BRACE)      // Expect '}' after if block
     )
 
     val parser = Parser(tokens).parse()

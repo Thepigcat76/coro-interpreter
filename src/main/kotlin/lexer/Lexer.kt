@@ -64,7 +64,7 @@ class Lexer {
                         }
 
                         else -> {
-                            tokens.add(Token(TokenType.FUNCTION, "$identifier"))
+                            tokens.add(Token(TokenType.IDENTIFIER, "$identifier"))
                         }
                     }
                 }
@@ -84,7 +84,7 @@ class Lexer {
 }
 
 class ReadFile {
-    fun read(): String? {
+    fun read(): String {
         val filename = "src/main/resources/example.coro"
         val file = File(filename)
         var lines: Array<String?> = emptyArray()
@@ -103,13 +103,13 @@ class ReadFile {
         return convertLinesToString(lines)
     }
 
-    private fun convertLinesToString(lines: Array<String?>): String? {
+    private fun convertLinesToString(lines: Array<String?>): String {
         val words = lines.flatMap { line -> line?.split("\\s+".toRegex()) ?: emptyList() }
         return words.joinToString(" ")
     }
 }
 
-val tokenStream = Lexer().tokenize(ReadFile().read().toString())
+val tokenStream = Lexer().tokenize(ReadFile().read())
 
 fun main() {
     println(tokenStream)

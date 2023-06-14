@@ -10,9 +10,10 @@ enum class TokenType {
     COLON, // Colon :
     QUOT, // Quotation marks ""
     INTEGER, // Any integer
-    FUNCTION, // Result of a definition
+    IDENTIFIER, // A variable, function, condition... something to be identified by the interpreter :P
 
     IF,
+    ELIF,
     ELSE,
     REPEAT,
     DEFINE,
@@ -45,6 +46,7 @@ val keywords = mapOf(
     "repeat" to TokenType.REPEAT,
     "end" to TokenType.END,
     "if" to TokenType.IF,
+    "elif" to TokenType.ELIF,
     "else" to TokenType.ELSE,
     "not" to TokenType.NOT,
     "while" to TokenType.WHILE,
