@@ -19,7 +19,12 @@ class Parser(val tokenStream: List<Token>) {
     private fun ifStatement(): Int {
         consume(TokenType.IF, "expected 'if'")
 
-        consumeOptional(TokenType.NOT)
+        if (match(TokenType.NOT)) {
+            advance()
+            //invert()
+        } else {
+            advance()
+        }
 
         consume(TokenType.IDENTIFIER, "expected condition")
 
@@ -47,17 +52,6 @@ class Parser(val tokenStream: List<Token>) {
             advance()
         } else {
             throw IllegalArgumentException(errorMessage)
-        }
-    }
-
-    private fun consumeOptional(optionalTokenType: TokenType): Boolean {
-        //Return true if
-        if (check(optionalTokenType)) {
-            advance()
-            return true
-        } else {
-            advance()
-            return false
         }
     }
 
