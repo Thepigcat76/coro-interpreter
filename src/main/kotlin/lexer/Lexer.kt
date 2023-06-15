@@ -22,7 +22,7 @@ class Lexer {
                         identifier.append(input[currentPos])
                         currentPos++
                     }
-                    when (identifier.toString()) {
+                    when (identifier.toString().lowercase()) {
                         "not", "nicht" -> {
                             tokens.add(Token(TokenType.NOT))
                         }
@@ -59,8 +59,8 @@ class Lexer {
                             tokens.add(Token(TokenType.WHILE))
                         }
 
-                        "EOL" -> {
-                            tokens.add(Token(TokenType.EOL, "EOL"))
+                        "eol" -> {
+                            tokens.add(Token(TokenType.EOL, "eol"))
                         }
 
                         else -> {
@@ -94,7 +94,9 @@ class ReadFile {
             var line: String?
             while (reader.readLine().also { line = it } != null) {
                 lines += line
-                lines += "EOL"
+                if (line != "") {
+                    lines += "EOL"
+                }
             }
             reader.close()
         } catch (e: Exception) {
