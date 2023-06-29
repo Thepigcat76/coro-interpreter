@@ -6,8 +6,8 @@ import java.io.BufferedReader
 import java.io.File
 
 class Lexer {
+    private val tokens = mutableListOf<Token>()
     fun tokenize(input: String): List<Token> {
-        val tokens = mutableListOf<Token>()
         var currentPos = 0
         while (currentPos < input.length) {
             val char = input[currentPos]
