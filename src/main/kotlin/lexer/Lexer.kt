@@ -1,9 +1,6 @@
 package lexer
 
-import token.Token
-import token.TokenType
-import java.io.BufferedReader
-import java.io.File
+import token.*
 
 class Lexer {
     private val tokens = mutableListOf<Token>()
@@ -16,50 +13,50 @@ class Lexer {
                     currentPos++
                 }
 
-                char.isLetter() -> {
+                char.isLetter() && char != '(' && char != ')' -> {
                     val identifier = StringBuilder()
                     while (currentPos < input.length && char.isLetterOrDigit() && !input[currentPos].isWhitespace()) {
                         identifier.append(input[currentPos])
                         currentPos++
                     }
                     when (identifier.toString().lowercase()) {
-                        "not", "nicht" -> {
+                        keywords[TokenType.NOT] -> {
                             tokens.add(Token(TokenType.NOT))
                         }
 
-                        "if", "wenn" -> {
+                        keywords[TokenType.IF] -> {
                             tokens.add(Token(TokenType.IF))
                         }
 
-                        "repeat", "wiederhole" -> {
+                        keywords[TokenType.REPEAT] -> {
                             tokens.add(Token(TokenType.REPEAT))
                         }
 
-                        "end", "ende" -> {
+                        keywords[TokenType.END] -> {
                             tokens.add(Token(TokenType.END))
                         }
 
-                        "else", "sonst" -> {
+                        keywords[TokenType.ELSE] -> {
                             tokens.add(Token(TokenType.ELSE))
                         }
 
-                        "always", "immer" -> {
+                        keywords[TokenType.ALWAYS] -> {
                             tokens.add(Token(TokenType.ALWAYS))
                         }
 
-                        "times", "mal" -> {
+                        keywords[TokenType.TIMES] -> {
                             tokens.add((Token(TokenType.TIMES)))
                         }
 
-                        "define", "definiere" -> {
+                        keywords[TokenType.DEFINE] -> {
                             tokens.add(Token(TokenType.DEFINE))
                         }
 
-                        "while", "solange" -> {
+                        keywords[TokenType.WHILE] -> {
                             tokens.add(Token(TokenType.WHILE))
                         }
 
-                        "eol" -> {
+                        keywords[TokenType.EOL] -> {
                             tokens.add(Token(TokenType.EOL, "eol"))
                         }
 
@@ -81,38 +78,4 @@ class Lexer {
         }
         return tokens
     }
-}
-
-class ReadFile {
-    fun read(): String {
-        val filename = "src/main/resources/example.coro"
-        val file = File(filename)
-        var lines: Array<String?> = emptyArray()
-
-        try {
-            val reader = BufferedReader(file.reader())
-            var line: String?
-            while (reader.readLine().also { line = it } != null) {
-                lines += line
-                if (line != "") {
-                    lines += "EOL"
-                }
-            }
-            reader.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return convertLinesToString(lines)
-    }
-
-    private fun convertLinesToString(lines: Array<String?>): String {
-        val words = lines.flatMap { line -> line?.split("\\s+".toRegex()) ?: emptyList() }
-        return words.joinToString(" ")
-    }
-}
-
-val tokenStream = Lexer().tokenize(ReadFile().read())
-
-fun main() {
-    println(tokenStream)
 }
