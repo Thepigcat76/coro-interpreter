@@ -1,0 +1,27 @@
+this refers to example_en.coro
+
+{
+    type: "if-statement",
+    condition: {
+        inverted: true,
+        type: "identifier",
+        literal: "IsMark"
+    },
+    consequence: {
+        type: "function-call",
+        literal: "Marathon"
+    },
+
+    type: "function-definition",
+    name: "Marathon",
+    parameters: {
+        None
+    },
+    body: {
+        type: "function-call",
+        properties: {
+            literal: "Walk",
+            repeat: "0"
+        }
+    }
+}
