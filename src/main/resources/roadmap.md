@@ -1,9 +1,0 @@
-- Lexer - finished
-- Tokens - finished
-- Parser - started
-- Semantic Analyzer - not started
-- symbol table - not started
-- Abstract Syntax Tree - not started
-- Interpreter - not started
-- Runtime Environment - not started
-- Error handler - not started

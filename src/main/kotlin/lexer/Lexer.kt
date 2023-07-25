@@ -12,7 +12,6 @@ class Lexer {
                 char.isWhitespace() -> {
                     currentPos++
                 }
-
                 char.isLetter() && char != '(' && char != ')' -> {
                     val identifier = StringBuilder()
                     while (currentPos < input.length && char.isLetterOrDigit() && !input[currentPos].isWhitespace()) {
@@ -57,7 +56,7 @@ class Lexer {
                         }
 
                         keywords[TokenType.EOL] -> {
-                            tokens.add(Token(TokenType.EOL, "eol"))
+                            tokens.add(Token(TokenType.EOL))
                         }
 
                         else -> {
@@ -73,6 +72,10 @@ class Lexer {
                         currentPos++
                     }
                     tokens.add(Token(TokenType.INTEGER, identifier.toString()))
+                }
+
+                else -> {
+                    break
                 }
             }
         }

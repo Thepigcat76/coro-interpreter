@@ -6,7 +6,7 @@ import java.io.File
 
 class ReadFile {
     fun read(): String {
-        val filename = "src/main/resources/example.coro"
+        val filename = "src/main/resources/example_de.coro"
         val file = File(filename)
         var lines: Array<String?> = emptyArray()
 

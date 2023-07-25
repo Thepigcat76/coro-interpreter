@@ -16,6 +16,9 @@ enum class TokenType {
     DEFINE,
     END,
 
+    LPARENT, // (
+    RPARENT, // )
+
     EOL // End of line
 }
 
@@ -25,7 +28,7 @@ data class Token(val type: TokenType, val literal: String) {
     // adds a second alternate constructor
     // by automatically assigning a value to
     // the literal parameter based on the TokenType
-    constructor(type: TokenType) : this(type, keywords_en.entries.find { it.key == type }?.value ?: "")
+    constructor(type: TokenType) : this(type, keywords.entries.find { it.key == type }?.value ?: "")
 
     // Overrides the default
     // String conversion behaviour
@@ -52,6 +55,11 @@ val keywords_en = mapOf(
     TokenType.ELSE to "else",
     TokenType.NOT to "not",
     TokenType.WHILE to "while",
+
+    // Always the same
+    TokenType.EOL to "eol",
+    TokenType.LPARENT to "(",
+    TokenType.RPARENT to ")"
 )
 
 val keywords_de = mapOf(
@@ -64,6 +72,11 @@ val keywords_de = mapOf(
     TokenType.ELSE to "sonst",
     TokenType.NOT to "nicht",
     TokenType.WHILE to "solange",
+
+    // Always the same
+    TokenType.EOL to "eol",
+    TokenType.LPARENT to "(",
+    TokenType.RPARENT to ")"
 )
 
 var keywords = keywords_en

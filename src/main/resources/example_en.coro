@@ -1,0 +1,10 @@
+if not IsMark
+    Walk 1
+end if
+
+define Marathon
+    Walk 10
+end define
+
+# Call the Marathon function
+Marathon

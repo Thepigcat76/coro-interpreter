@@ -6,4 +6,5 @@ definiere Marathon
     Schritt 10
 ende definiere
 
-Marathon
+# Rufe die Marathon funktion auf
+Marathon()
