@@ -1,6 +1,6 @@
+import interpreter.Interpreter
 import lexer.Lexer
-import token.TokenType
-import token.keywords_en
+import token.TokenLanguages
 import java.io.BufferedReader
 import java.io.File
 
@@ -33,6 +33,6 @@ class ReadFile {
 }
 
 fun main() {
-    val tokenStream = Lexer().tokenize(ReadFile().read())
+    val tokenStream = Interpreter().interpret(ReadFile().read(), TokenLanguages.GERMAN); // use this enum parameter to change the language the interpreter will use
     println(tokenStream)
 }
