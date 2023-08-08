@@ -19,7 +19,8 @@ enum class TokenType {
     LPARENT, // (
     RPARENT, // )
 
-    EOL // End of line
+    EOL, // End of line
+    EOF, // End of file
 }
 
 // Data class to determine TokenType and value
@@ -58,6 +59,7 @@ val keywords_en = mapOf(
 
     // Always the same
     TokenType.EOL to "eol",
+    TokenType.EOF to "eof",
     TokenType.LPARENT to "(",
     TokenType.RPARENT to ")"
 )
@@ -75,6 +77,7 @@ val keywords_de = mapOf(
 
     // Always the same
     TokenType.EOL to "eol",
+    TokenType.EOF to "eof",
     TokenType.LPARENT to "(",
     TokenType.RPARENT to ")"
 )

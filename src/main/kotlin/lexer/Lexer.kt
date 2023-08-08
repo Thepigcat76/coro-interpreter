@@ -2,9 +2,9 @@ package lexer
 
 import token.*
 
-class Lexer {
+class Lexer(val input: String) {
     private val tokens = mutableListOf<Token>()
-    fun tokenize(input: String): List<Token> {
+    fun tokenize(): List<Token> {
         var currentPos = 0
         while (currentPos < input.length) {
             val char = input[currentPos]
@@ -79,6 +79,7 @@ class Lexer {
                 }
             }
         }
+        tokens.add(Token(TokenType.EOF))
         return tokens
     }
 }
