@@ -2,7 +2,7 @@ package lexer
 
 import token.*
 
-class Lexer(val input: String) {
+class Lexer(private val input: String) {
     private val tokens = mutableListOf<Token>()
     fun tokenize(): List<Token> {
         var currentPos = 0

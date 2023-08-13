@@ -1,48 +1,19 @@
 package parser
 
-import token.Token
+interface Statement
+interface Expression
+data class Identifier(val value: String) : Expression
 
-sealed interface Node {
-    fun tokenLiteral(): String
-}
+data class IfStatement(
+    override var statements: List<Statement>,
+    var condition: Expression?,
+    var consequence: List<Statement>,
+    var alternative: List<Statement>,
+) : BlockStatement(statements)
 
-sealed interface Statement : Node {
-    fun statementNode()
-}
+/*
+Will take the first token in the block as input and stop when it hits the 'end' keyword
+ */
+open class BlockStatement(open var statements: List<Statement>) : Statement
 
-sealed interface Expression : Node {
-    fun expressionNode()
-}
-
-class Program(var statements: List<Statement>?) {
-    fun tokenLiteral(): String {
-        return if (this.statements!!.isNotEmpty()) {
-            this.statements[0].tokenLiteral()
-        } else {
-            ""
-        }
-    }
-}
-
-class Identifier : Expression {
-    lateinit var token: Token
-    lateinit var value: String
-    override fun expressionNode() {
-    }
-
-    override fun tokenLiteral(): String {
-        return token.literal
-    }
-}
-
-class IfStatement {
-    lateinit var token: Token
-    lateinit var condition: Identifier
-    lateinit var consequence: BlockStatement
-    lateinit var alternative: BlockStatement
-}
-
-class BlockStatement {
-    lateinit var token: Token
-    lateinit var statements: Array<Statement>
-}
+data class Program(var statements: List<Statement>)

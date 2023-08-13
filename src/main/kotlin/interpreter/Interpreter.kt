@@ -2,13 +2,13 @@ package interpreter
 
 import lexer.Lexer
 import parser.Parser
+import parser.Program
 import token.*
 
-class Interpreter {
-    fun interpret(input: String, languages: TokenLanguages): List<Token> {
-        val lexer = Lexer(input)
-        val parser = Parser(lexer)
-        parser.parseProgram()
+class Interpreter(input: String, val languages: TokenLanguages) {
+    val lexer = Lexer(input)
+    val parser = Parser(lexer)
+    fun lex(): List<Token> {
         keywords = when (languages) {
             TokenLanguages.GERMAN -> {
                 keywords_de
@@ -18,6 +18,10 @@ class Interpreter {
                 keywords_en
             }
         }
-        return Lexer(input).tokenize()
+        return lexer.tokenize()
+    }
+
+    fun parse(): Program {
+        return parser.parseProgram()
     }
 }

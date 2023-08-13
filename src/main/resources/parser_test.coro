@@ -1,0 +1,3 @@
+if isWall()
+    Walk 10
+end

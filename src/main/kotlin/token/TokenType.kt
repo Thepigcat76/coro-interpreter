@@ -21,6 +21,7 @@ enum class TokenType {
 
     EOL, // End of line
     EOF, // End of file
+    ILLEGAL,
 }
 
 // Data class to determine TokenType and value
@@ -61,7 +62,8 @@ val keywords_en = mapOf(
     TokenType.EOL to "eol",
     TokenType.EOF to "eof",
     TokenType.LPARENT to "(",
-    TokenType.RPARENT to ")"
+    TokenType.RPARENT to ")",
+    TokenType.ILLEGAL to "ILLEGAL",
 )
 
 val keywords_de = mapOf(
@@ -79,7 +81,8 @@ val keywords_de = mapOf(
     TokenType.EOL to "eol",
     TokenType.EOF to "eof",
     TokenType.LPARENT to "(",
-    TokenType.RPARENT to ")"
+    TokenType.RPARENT to ")",
+    TokenType.ILLEGAL to "ILLEGAL",
 )
 
 var keywords = keywords_en
