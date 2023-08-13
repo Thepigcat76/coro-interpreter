@@ -3,6 +3,7 @@ package parser
 import lexer.Lexer
 import token.Token
 import token.TokenType
+import kotlin.collections.plus
 
 class Parser(lexer: Lexer) {
     private val tokenStream = lexer.tokenize()
@@ -38,19 +39,38 @@ class Parser(lexer: Lexer) {
                 println(this.curToken.type)
                 parseIfStatement()
             }
-
             else -> {
-                null
+                ExpressionStatement(Identifier(this.curToken.literal))
             }
         }
     }
 
     private fun parseIfStatement(): IfStatement? {
-        val statement = IfStatement(emptyList(), null, emptyList(), emptyList())
+        val statement = IfStatement(null, emptyList(), emptyList())
         if (this.peekToken.type != TokenType.IDENTIFIER) {
+            // Here go error messages
             return null
+        } else {
+            statement.condition = Identifier(this.peekToken.literal)
         }
-        statement.condition = Identifier(this.peekToken.literal)
+        nextToken()
+        nextToken()
+        if (this.curToken.type != TokenType.EOL) {
+            return null
+        } else {
+            nextToken()
+            statement.consequence = parseBlockStatement().statements
+        }
+        return statement
+    }
+
+    private fun parseBlockStatement(): BlockStatement {
+        val statement = BlockStatement(emptyList())
+        while (this.curToken.type != TokenType.END) {
+            statement.statements += parseStatement()
+            println("Cur statement: ${statement.statements}, curToken: ${this.curToken}")
+            nextToken()
+        }
         return statement
     }
 }
