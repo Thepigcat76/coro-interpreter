@@ -59,7 +59,7 @@ class Parser(lexer: Lexer) {
         if (peekToken.type == TokenType.IDENTIFIER) {
             nextToken()
             statement.condition = parseFunctionCall()
-            val ifBlock = parseIfStatementBlock()
+            val ifBlock = parseIfBlock()
             statement.consequence = ifBlock.first
             statement.alternative = ifBlock.second
         } else {
@@ -68,17 +68,31 @@ class Parser(lexer: Lexer) {
         return statement
     }
 
-    private fun parseIfStatementBlock(): Pair<List<Statement>, List<Statement>> {
+    private fun parseIfBlock(): Pair<List<Statement>, List<Statement>> {
         val consequence = emptyList<Statement>().toMutableList()
         val alternative = emptyList<Statement>().toMutableList()
-        println("if block: entry token: $curToken")
-        while (curToken.type != TokenType.END) {
-            val stmt = parseStatement()
-            if (stmt != null) {
-                consequence.add(stmt)
+        while (true) {
+            if (curToken.type != TokenType.ELSE){
+                val stmt = parseStatement()
+                if (stmt != null) {
+                    consequence.add(stmt)
+                }
+                nextToken()
+            } else {
+                while (curToken.type != TokenType.END){
+                    val stmt = parseStatement()
+                    println(stmt)
+                    if (stmt != null) {
+                        alternative.add(stmt)
+                    }
+                    nextToken()
+                    println(alternative)
+                    println(curToken)
+                }
             }
-            nextToken()
-            println(stmt)
+            if (curToken.type == TokenType.END) {
+                break
+            }
         }
         return Pair(consequence, alternative)
     }

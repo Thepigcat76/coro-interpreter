@@ -1,7 +1,4 @@
 import interpreter.Interpreter
-import parser.Expression
-import parser.IfStatement
-import parser.Statement
 import token.TokenLanguages
 import java.io.BufferedReader
 import java.io.File
