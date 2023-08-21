@@ -71,28 +71,20 @@ class Parser(lexer: Lexer) {
     private fun parseIfBlock(): Pair<List<Statement>, List<Statement>> {
         val consequence = emptyList<Statement>().toMutableList()
         val alternative = emptyList<Statement>().toMutableList()
-        while (true) {
-            if (curToken.type != TokenType.ELSE){
-                val stmt = parseStatement()
-                if (stmt != null) {
-                    consequence.add(stmt)
-                }
-                nextToken()
-            } else {
-                while (curToken.type != TokenType.END){
-                    val stmt = parseStatement()
-                    println(stmt)
-                    if (stmt != null) {
-                        alternative.add(stmt)
-                    }
-                    nextToken()
-                    println(alternative)
-                    println(curToken)
-                }
+        while (curToken.type != TokenType.ELSE) {
+            val stmt = parseStatement()
+            if (stmt != null) {
+                consequence.add(stmt)
             }
-            if (curToken.type == TokenType.END) {
-                break
+            nextToken()
+        }
+
+        while (curToken.type != TokenType.END) {
+            val stmt = parseStatement()
+            if (stmt != null) {
+                alternative.add(stmt)
             }
+            nextToken()
         }
         return Pair(consequence, alternative)
     }
