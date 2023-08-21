@@ -1,8 +1,19 @@
 package lexer
 
+import parser.Expression
 import token.*
 
-class Lexer(private val input: String) {
+class Lexer(private val input: String, private val languages: TokenLanguages) {
+    init {
+        keywords = when (languages) {
+            TokenLanguages.GERMAN -> {
+                keywords_de
+            }
+            TokenLanguages.ENGLISH -> {
+                keywords_en
+            }
+        }
+    }
     private val tokens = mutableListOf<Token>()
     fun tokenize(): List<Token> {
         var currentPos = 0
@@ -18,50 +29,11 @@ class Lexer(private val input: String) {
                         identifier.append(input[currentPos])
                         currentPos++
                     }
-                    when (identifier.toString().lowercase()) {
-                        keywords[TokenType.NOT] -> {
-                            tokens.add(Token(TokenType.NOT))
-                        }
-
-                        keywords[TokenType.IF] -> {
-                            tokens.add(Token(TokenType.IF))
-                        }
-
-                        keywords[TokenType.REPEAT] -> {
-                            tokens.add(Token(TokenType.REPEAT))
-                        }
-
-                        keywords[TokenType.END] -> {
-                            tokens.add(Token(TokenType.END))
-                        }
-
-                        keywords[TokenType.ELSE] -> {
-                            tokens.add(Token(TokenType.ELSE))
-                        }
-
-                        keywords[TokenType.ALWAYS] -> {
-                            tokens.add(Token(TokenType.ALWAYS))
-                        }
-
-                        keywords[TokenType.TIMES] -> {
-                            tokens.add((Token(TokenType.TIMES)))
-                        }
-
-                        keywords[TokenType.DEFINE] -> {
-                            tokens.add(Token(TokenType.DEFINE))
-                        }
-
-                        keywords[TokenType.WHILE] -> {
-                            tokens.add(Token(TokenType.WHILE))
-                        }
-
-                        keywords[TokenType.EOL] -> {
-                            tokens.add(Token(TokenType.EOL))
-                        }
-
-                        else -> {
-                            tokens.add(Token(TokenType.IDENTIFIER, "$identifier"))
-                        }
+                    val x = keywords.entries.find { it.value == identifier.toString() }
+                    if (x != null) {
+                        tokens.add(Token(x.key, x.value))
+                    } else {
+                        tokens.add(Token(TokenType.IDENTIFIER, identifier.toString()))
                     }
                 }
 
