@@ -39,6 +39,6 @@ fun main() {
     val tokenStream = interpreter.lex() // use the TokenLanguage enum parameter to change the language the interpreter will use
     val program = interpreter.parse()
 
-    println(tokenStream)
+    println("$tokenStream \n ------------------")
     println(program)
 }

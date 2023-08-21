@@ -5,8 +5,8 @@ import parser.Parser
 import parser.Program
 import token.*
 
-class Interpreter(input: String, val languages: TokenLanguages) {
-    val lexer = Lexer(input)
+class Interpreter(input: String, private val languages: TokenLanguages) {
+    private val lexer = Lexer(input)
     val parser = Parser(lexer)
     fun lex(): List<Token> {
         keywords = when (languages) {

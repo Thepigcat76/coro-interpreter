@@ -1,3 +1,7 @@
 if isWall()
-    Walk 10
+    Walk(10)
+    if isBrick()
+        Walk(1)
+    end
+    Walk(90)
 end

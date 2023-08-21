@@ -12,9 +12,9 @@ class Lexer(private val input: String) {
                 char.isWhitespace() -> {
                     currentPos++
                 }
-                char.isLetter() && char != '(' && char != ')' -> {
+                char.isLetter() -> {
                     val identifier = StringBuilder()
-                    while (currentPos < input.length && char.isLetterOrDigit() && !input[currentPos].isWhitespace()) {
+                    while (currentPos < input.length && input[currentPos].isLetterOrDigit() && !input[currentPos].isWhitespace()) {
                         identifier.append(input[currentPos])
                         currentPos++
                     }
@@ -75,7 +75,15 @@ class Lexer(private val input: String) {
                 }
 
                 else -> {
-                    break
+                    when (char) {
+                        keywords[TokenType.LPARENT]!!.toCharArray()[0] -> {
+                            tokens.add(Token(TokenType.LPARENT))
+                        }
+                        keywords[TokenType.RPARENT]!!.toCharArray()[0] -> {
+                            tokens.add(Token(TokenType.RPARENT))
+                        }
+                    }
+                    currentPos++
                 }
             }
         }

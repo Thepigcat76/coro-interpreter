@@ -34,42 +34,95 @@ class Parser(lexer: Lexer) {
     }
 
     private fun parseStatement(): Statement? {
-        return when (this.curToken.type) {
+        return when (curToken.type) {
             TokenType.IF -> {
-                println(this.curToken.type)
                 parseIfStatement()
             }
+
+            TokenType.IDENTIFIER -> {
+                if (this.peekToken.type == TokenType.LPARENT) {
+                    ExpressionStatement(parseFunctionCall())
+                } else {
+                    null
+                }
+            }
+
             else -> {
-                ExpressionStatement(Identifier(this.curToken.literal))
+                null
+                // ExpressionStatement(Identifier(this.curToken.literal))
             }
         }
     }
 
-    private fun parseIfStatement(): IfStatement? {
+    private fun parseIfStatement(): IfStatement {
         val statement = IfStatement(null, emptyList(), emptyList())
-        if (this.peekToken.type != TokenType.IDENTIFIER) {
-            // Here go error messages
-            return null
-        } else {
-            statement.condition = Identifier(this.peekToken.literal)
-        }
-        nextToken()
-        nextToken()
-        if (this.curToken.type != TokenType.EOL) {
-            return null
-        } else {
+        if (peekToken.type == TokenType.IDENTIFIER) {
             nextToken()
-            statement.consequence = parseBlockStatement().statements
+            statement.condition = parseFunctionCall()
+            val ifBlock = parseIfStatementBlock()
+            statement.consequence = ifBlock.first
+            statement.alternative = ifBlock.second
+        } else {
+            throw Exception("Not a valid if statement")
         }
         return statement
     }
 
-    private fun parseBlockStatement(): BlockStatement {
-        val statement = BlockStatement(emptyList())
-        while (this.curToken.type != TokenType.END) {
-            statement.statements += parseStatement()
-            println("Cur statement: ${statement.statements}, curToken: ${this.curToken}")
+    private fun parseIfStatementBlock(): Pair<List<Statement>, List<Statement>> {
+        val consequence = emptyList<Statement>().toMutableList()
+        val alternative = emptyList<Statement>().toMutableList()
+        println("if block: entry token: $curToken")
+        while (curToken.type != TokenType.END) {
+            val stmt = parseStatement()
+            if (stmt != null) {
+                consequence.add(stmt)
+            }
             nextToken()
+            println(stmt)
+        }
+        return Pair(consequence, alternative)
+    }
+
+    private fun parseFunctionCall(): FunctionCallExpression {
+        val statement = FunctionCallExpression(Identifier(""), null)
+        if (curToken.type == TokenType.IDENTIFIER) {
+            statement.name.value = curToken.literal
+            when (peekToken.type) {
+                TokenType.LPARENT -> {
+                    nextToken()
+                    when (peekToken.type) {
+                        TokenType.INTEGER -> {
+                            nextToken()
+                            statement.argument = curToken.literal.toInt()
+                            if (peekToken.type == TokenType.RPARENT) {
+                                // Do this so it leaves the function
+                                nextToken()
+                                nextToken() // eol
+                            } else {
+                                throw Exception("Not a valid function call")
+                            }
+                        }
+
+                        TokenType.RPARENT -> {
+                            nextToken()
+                        }
+
+                        else -> {
+                            throw Exception("Not a valid function call")
+                        }
+                    }
+                }
+
+                TokenType.EOL -> {
+                    nextToken()
+                }
+
+                else -> {
+                    throw Exception("Not a valid function call")
+                }
+            }
+        } else {
+            throw Exception("Not a valid function call")
         }
         return statement
     }
