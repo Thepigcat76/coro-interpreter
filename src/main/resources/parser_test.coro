@@ -1,5 +1,1 @@
-if isWall()
-    Walk(10)
-else
-    Walk(20)
-end
+x(0, 1)

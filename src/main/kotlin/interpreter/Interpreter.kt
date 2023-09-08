@@ -1,9 +1,8 @@
 package interpreter
 
-import lexer.Lexer
+import lexer.*
 import parser.Parser
 import parser.Program
-import token.*
 
 class Interpreter(input: String, private val languages: TokenLanguages) {
     private val lexer = Lexer(input, languages)

@@ -1,4 +1,4 @@
-package token
+package lexer
 
 //Define the possible keywords and symbols
 enum class TokenType {
@@ -18,6 +18,7 @@ enum class TokenType {
 
     LPARENT, // (
     RPARENT, // )
+    COMMA,   // ,
 
     EOL, // End of line
     EOF, // End of file
@@ -63,6 +64,7 @@ val keywords_en = mapOf(
     TokenType.EOF to "eof",
     TokenType.LPARENT to "(",
     TokenType.RPARENT to ")",
+    TokenType.COMMA to ",",
     TokenType.ILLEGAL to "ILLEGAL",
 )
 
@@ -82,6 +84,7 @@ val keywords_de = mapOf(
     TokenType.EOF to "eof",
     TokenType.LPARENT to "(",
     TokenType.RPARENT to ")",
+    TokenType.COMMA to ",",
     TokenType.ILLEGAL to "ILLEGAL",
 )
 

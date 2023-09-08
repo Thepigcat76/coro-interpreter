@@ -1,5 +1,5 @@
 import interpreter.Interpreter
-import token.TokenLanguages
+import lexer.TokenLanguages
 import java.io.BufferedReader
 import java.io.File
 
